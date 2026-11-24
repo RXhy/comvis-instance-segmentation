@@ -1,0 +1,7 @@
+model,run,gpu,start,end,minutes,status,note
+yolo11s-seg,025pct,Tesla T4,2026-11-23T08:21:55,2026-11-23T08:25:35,3.66,ok,train
+yolo11s-seg,025pct,Tesla T4,2026-11-23T08:25:35,2026-11-23T08:26:14,0.65,ok,eval
+yolo11s-seg,050pct,Tesla T4,2026-11-23T08:26:14,2026-11-23T08:37:28,11.23,ok,train
+yolo11s-seg,050pct,Tesla T4,2026-11-23T08:37:28,2026-11-23T08:38:10,0.7,ok,eval
+yolo11s-seg,100pct,Tesla T4,2026-11-23T08:38:10,2026-11-23T09:00:58,22.78,ok,train
+yolo11s-seg,100pct,Tesla T4,2026-11-23T09:00:58,2026-11-23T09:01:44,0.78,ok,eval

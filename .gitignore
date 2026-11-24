@@ -1,0 +1,29 @@
+# Bobot model: >100 MB per file (batas GitHub). Disimpan di luar repo (Kaggle output / Google Drive).
+*.pt
+
+# Dataset: download ulang lewat 01_download_dataset.ipynb dan export Roboflow
+data/
+
+# Foto asli: EXIF berisi lokasi GPS dan ada wajah orang.
+# Bukti EXIF ada di bukti/exif_mycapture.csv (tanpa GPS).
+mycapture/
+
+# Hasil antara yang bisa dibuat ulang oleh notebook
+hasil_lokal/preds/
+hasil_lokal/data/
+hasil_lokal/eksperimen/backlight_asli/
+hasil_lokal/eksperimen/backlight_gamma/
+hasil_lokal/eksperimen/*.jpg
+hasil_lokal/eksperimen/*.json
+*/[0-9][0-9][0-9]pct/preds_*.json
+*/data_canonical/*
+!*/data_canonical/classes.json
+subsets/
+
+# Python / Jupyter / sistem
+__pycache__/
+.ipynb_checkpoints/
+*.zip
+.env
+Thumbs.db
+desktop.ini

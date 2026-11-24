@@ -1,0 +1,7 @@
+model,run,gpu,start,end,minutes,status,note
+maskrcnn-r50-fpn-v2,025pct,Tesla T4,2026-11-23T08:24:23,2026-11-23T08:40:46,16.38,ok,train
+maskrcnn-r50-fpn-v2,025pct,Tesla T4,2026-11-23T08:40:46,2026-11-23T08:42:44,1.97,ok,eval
+maskrcnn-r50-fpn-v2,050pct,Tesla T4,2026-11-23T08:42:45,2026-11-23T09:06:39,23.91,ok,train
+maskrcnn-r50-fpn-v2,050pct,Tesla T4,2026-11-23T09:06:39,2026-11-23T09:08:30,1.85,ok,eval
+maskrcnn-r50-fpn-v2,100pct,Tesla T4,2026-11-23T09:08:31,2026-11-23T09:48:49,40.3,ok,train
+maskrcnn-r50-fpn-v2,100pct,Tesla T4,2026-11-23T09:48:49,2026-11-23T09:50:28,1.66,ok,eval

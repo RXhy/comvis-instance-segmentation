@@ -1,0 +1,7 @@
+model,run,gpu,start,end,minutes,status,note
+mask2former-swin-tiny,025pct,Tesla T4,2026-11-23T20:36:55,2026-11-23T21:01:42,24.78,ok,train
+mask2former-swin-tiny,025pct,Tesla T4,2026-11-23T21:01:42,2026-11-23T21:03:27,1.75,ok,eval
+mask2former-swin-tiny,050pct,Tesla T4,2026-11-23T21:03:28,2026-11-23T21:42:50,39.38,ok,train
+mask2former-swin-tiny,050pct,Tesla T4,2026-11-23T21:42:50,2026-11-23T21:44:34,1.72,ok,eval
+mask2former-swin-tiny,100pct,Tesla T4,2026-11-23T21:44:34,2026-11-23T22:25:01,40.45,ok,train
+mask2former-swin-tiny,100pct,Tesla T4,2026-11-23T22:25:01,2026-11-23T22:27:01,2.0,ok,eval

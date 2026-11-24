@@ -1,0 +1,60 @@
+index,nama_file,nama_asli,waktu_foto,deskripsi,kondisi
+1,mycapture_01.jpg,IMG_20261117_152930.jpg,2026-11-17 15:29:30,meja hobi,normal
+2,mycapture_02.jpg,IMG_20261117_164517.jpg,2026-11-17 16:45:17,kamar laci,normal
+3,mycapture_03.jpg,IMG_20261117_164710.jpg,2026-11-17 16:47:10,kamar meja,normal
+4,mycapture_04.jpg,IMG_20261117_164721.jpg,2026-11-17 16:47:21,kamar kasur,normal
+5,mycapture_05.jpg,IMG_20261117_164754.jpg,2026-11-17 16:47:54,kamar rak plastik,normal
+6,mycapture_06.jpg,IMG_20261117_164804.jpg,2026-11-17 16:48:04,kamar pojok,backlight
+7,mycapture_07.jpg,IMG_20261117_164814.jpg,2026-11-17 16:48:14,gudang kardus,penuh;saling menutupi
+8,mycapture_08.jpg,IMG_20261117_164816.jpg,2026-11-17 16:48:16,gudang kardus,penuh;saling menutupi
+9,mycapture_09.jpg,IMG_20261117_164820.jpg,2026-11-17 16:48:20,pojok jendela,backlight
+10,mycapture_10.jpg,IMG_20261117_164832.jpg,2026-11-17 16:48:32,balkon tanaman,normal
+11,mycapture_11.jpg,IMG_20261117_164851.jpg,2026-11-17 16:48:51,pojok jendela,backlight
+12,mycapture_12.jpg,IMG_20261117_164856.jpg,2026-11-17 16:48:56,tumpukan barang,sudut ekstrem
+13,mycapture_13.jpg,IMG_20261117_164906.jpg,2026-11-17 16:49:06,gudang kardus,penuh;saling menutupi
+14,mycapture_14.jpg,IMG_20261117_164916.jpg,2026-11-17 16:49:16,area cuci,normal
+15,mycapture_15.jpg,IMG_20261117_164934.jpg,2026-11-17 16:49:34,ruang cuci,normal
+16,mycapture_16.jpg,IMG_20261117_164941.jpg,2026-11-17 16:49:41,kamar mandi,normal
+17,mycapture_17.jpg,IMG_20261117_164945.jpg,2026-11-17 16:49:45,kamar mandi,normal
+18,mycapture_18.jpg,IMG_20261117_165004.jpg,2026-11-17 16:50:04,pintu belakang,normal
+19,mycapture_19.jpg,IMG_20261117_165013.jpg,2026-11-17 16:50:13,kompor rak,normal
+20,mycapture_20.jpg,IMG_20261117_165018.jpg,2026-11-17 16:50:18,gudang rak,penuh;saling menutupi
+21,mycapture_21.jpg,IMG_20261117_165022.jpg,2026-11-17 16:50:22,gudang rak,penuh;saling menutupi
+22,mycapture_22.jpg,IMG_20261117_165025.jpg,2026-11-17 16:50:25,gudang rak,penuh;saling menutupi
+23,mycapture_23.jpg,IMG_20261117_165027.jpg,2026-11-17 16:50:27,gudang rak,penuh;saling menutupi
+24,mycapture_24.jpg,IMG_20261117_165048.jpg,2026-11-17 16:50:48,ruang makan,normal
+25,mycapture_25.jpg,IMG_20261117_165051.jpg,2026-11-17 16:50:51,ruang makan,penuh;saling menutupi
+26,mycapture_26.jpg,IMG_20261117_165059.jpg,2026-11-17 16:50:59,dapur,penuh
+27,mycapture_27.jpg,IMG_20261117_165102.jpg,2026-11-17 16:51:02,dapur,normal
+28,mycapture_28.jpg,IMG_20261117_165114.jpg,2026-11-17 16:51:14,dapur,penuh
+29,mycapture_29.jpg,IMG_20261117_165147.jpg,2026-11-17 16:51:47,kamar tas,normal
+30,mycapture_30.jpg,IMG_20261117_165201.jpg,2026-11-17 16:52:01,kamar kursi,normal
+31,mycapture_31.jpg,IMG_20261117_165226.jpg,2026-11-17 16:52:26,kamar kasur,normal
+32,mycapture_32.jpg,IMG_20261117_165256.jpg,2026-11-17 16:52:56,lemari kayu,normal
+33,mycapture_33.jpg,IMG_20261117_165300.jpg,2026-11-17 16:53:00,kamar laci biru,normal
+34,mycapture_34.jpg,IMG_20261117_165305.jpg,2026-11-17 16:53:05,kamar rak buku,normal
+35,mycapture_35.jpg,IMG_20261117_165310.jpg,2026-11-17 16:53:10,kamar kaligrafi,normal
+36,mycapture_36.jpg,IMG_20261117_165319.jpg,2026-11-17 16:53:19,kamar kaligrafi,normal
+37,mycapture_37.jpg,IMG_20261117_165321.jpg,2026-11-17 16:53:21,rak dinding,normal
+38,mycapture_38.jpg,IMG_20261117_165514.jpg,2026-11-17 16:55:14,akuarium,normal
+39,mycapture_39.jpg,IMG_20261117_165518.jpg,2026-11-17 16:55:18,dinding bata,backlight
+40,mycapture_40.jpg,IMG_20261117_165523.jpg,2026-11-17 16:55:23,ruang tamu,backlight
+41,mycapture_41.jpg,IMG_20261117_165526.jpg,2026-11-17 16:55:26,ruang tamu,backlight
+42,mycapture_42.jpg,IMG_20261117_165530.jpg,2026-11-17 16:55:30,bangku jendela,normal
+43,mycapture_43.jpg,IMG_20261117_165536.jpg,2026-11-17 16:55:36,bangku jendela,normal
+44,mycapture_44.jpg,IMG_20261117_220606.jpg,2026-11-17 22:06:06,meja laptop,normal
+45,mycapture_45.jpg,IMG_20261117_220611.jpg,2026-11-17 22:06:11,meja berantakan,normal
+46,mycapture_46.jpg,IMG_20261117_220615.jpg,2026-11-17 22:06:15,lemari rak,normal
+47,mycapture_47.jpg,IMG_20261117_220621.jpg,2026-11-17 22:06:21,pojok gorden keranjang,normal
+48,mycapture_48.jpg,IMG_20261117_220631.jpg,2026-11-17 22:06:31,kasur bantal,normal
+49,mycapture_49.jpg,.jpg (tanpa nama),2026-11-18 12:34:13,kafe stool besi,saling menutupi
+50,mycapture_50.jpg,IMG_20261119_091359.jpg,2026-11-19 09:13:59,kafe meja laptop,backlight
+51,mycapture_51.jpg,IMG_20261119_102057.jpg,2026-11-19 10:20:57,lab komputer,penuh
+52,mycapture_52.jpg,IMG_20261119_163717.jpg,2026-11-19 16:37:17,ruang kelas,saling menutupi
+53,mycapture_53.jpg,IMG_20261119_163722.jpg,2026-11-19 16:37:22,ruang kelas,normal
+54,mycapture_54.jpg,IMG_20261119_163728.jpg,2026-11-19 16:37:28,ruang kelas,normal
+55,mycapture_55.jpg,IMG_20261121_200633.jpg,2026-11-21 20:06:33,ballroom kursi,penuh;saling menutupi
+56,mycapture_56.jpg,IMG_20261121_200635.jpg,2026-11-21 20:06:35,ballroom panggung,redup;penuh;saling menutupi
+57,mycapture_57.jpg,IMG_20261121_200638.jpg,2026-11-21 20:06:38,lobby resepsionis,normal
+58,mycapture_58.jpg,IMG_20261121_200647.jpg,2026-11-21 20:06:47,ballroom kursi,penuh;saling menutupi
+59,mycapture_59.jpg,IMG_20261121_200730.jpg,2026-11-21 20:07:30,ballroom kursi,penuh;saling menutupi
