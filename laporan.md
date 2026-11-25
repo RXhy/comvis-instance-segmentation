@@ -10,6 +10,7 @@
 | Dataset latih | Panoptic Indoor Segmentation **v5** (Roboflow Universe, CC BY 4.0) |
 | Test set sendiri | `mycapture`: 59 foto ruangan yang saya ambil dan anotasi sendiri |
 | Model | YOLO11s-seg, Mask R-CNN R50-FPN v2, Mask2Former Swin-Tiny |
+| Repositori GitHub | <https://github.com/RXhy/comvis-instance-segmentation> |
 
 ---
 
@@ -35,18 +36,6 @@ Temuan utamanya:
   dan YOLO justru turun karena *catastrophic forgetting*.
 - **Kegagalan di foto sendiri lebih sering berupa salah kelas atau objek yang tidak terdeteksi**, bukan mask yang kasar.
   Contohnya, barisan kursi dikira tangga dan piring dikira panci.
-
-### Peta luaran tugas
-
-| No | Komponen | Di mana |
-|---|---|---|
-| 1 | Test set buatan sendiri: screenshot anotasi, EXIF, performa test asli vs sendiri, domain shift | Bagian 1.2 dan 4.2 |
-| 2 | Variabel NRP (jumlah data latih): tabel dan grafik untuk ketiga model | Bagian 4.1 |
-| 3 | Hipotesis bertanggal sebelum training | Bagian 2 dan 5; entri aslinya di `logbook.md` bagian 3 |
-| 4 | Lima studi kasus kegagalan bergambar dengan eksperimen pembuktian | Bagian 6 |
-| 5 | Bukti proses: repositori, log training, waktu GPU, logbook mingguan | Bagian 3.3 dan 8, `logbook.md` |
-| 6 | Deklarasi AI, prompt utama, dan kasus saran AI yang salah | Lampiran A |
-| 7 | Demo dan tanya jawab | Dilakukan saat sesi, memakai `06_demo.ipynb` |
 
 ---
 
@@ -84,14 +73,14 @@ dan kondisi setiap foto saya catat di `rename_log.csv`.
 **Kondisi foto.** 25 dari 59 foto termasuk kondisi sulit (syarat tugas minimal 10). Satu foto bisa punya lebih dari
 satu label:
 
-| Kondisi | Jumlah foto |
-|---|---|
-| Normal | 34 |
-| Penuh (banyak objek) | 15 |
-| Saling menutupi | 14 |
-| Backlight (melawan cahaya) | 7 |
-| Redup | 1 |
-| Sudut ekstrem | 1 |
+| Kondisi | Jumlah foto | Contoh |
+|---|---|---|
+| Normal | 34 | <img src="hasil_lokal/contoh_kondisi/normal_01.jpg" width="96" alt="#01"> <img src="hasil_lokal/contoh_kondisi/normal_16.jpg" width="96" alt="#16"> <img src="hasil_lokal/contoh_kondisi/normal_24.jpg" width="96" alt="#24"> <img src="hasil_lokal/contoh_kondisi/normal_34.jpg" width="96" alt="#34"> <img src="hasil_lokal/contoh_kondisi/normal_57.jpg" width="96" alt="#57"> |
+| Penuh (banyak objek) | 15 | <img src="hasil_lokal/contoh_kondisi/penuh_07.jpg" width="96" alt="#07"> <img src="hasil_lokal/contoh_kondisi/penuh_20.jpg" width="96" alt="#20"> <img src="hasil_lokal/contoh_kondisi/penuh_28.jpg" width="96" alt="#28"> <img src="hasil_lokal/contoh_kondisi/penuh_51.jpg" width="96" alt="#51"> <img src="hasil_lokal/contoh_kondisi/penuh_58.jpg" width="96" alt="#58"> |
+| Saling menutupi | 14 | <img src="hasil_lokal/contoh_kondisi/saling_menutupi_13.jpg" width="96" alt="#13"> <img src="hasil_lokal/contoh_kondisi/saling_menutupi_22.jpg" width="96" alt="#22"> <img src="hasil_lokal/contoh_kondisi/saling_menutupi_25.jpg" width="96" alt="#25"> <img src="hasil_lokal/contoh_kondisi/saling_menutupi_49.jpg" width="96" alt="#49"> <img src="hasil_lokal/contoh_kondisi/saling_menutupi_52.jpg" width="96" alt="#52"> |
+| Backlight (melawan cahaya) | 7 | <img src="hasil_lokal/contoh_kondisi/backlight_06.jpg" width="96" alt="#06"> <img src="hasil_lokal/contoh_kondisi/backlight_09.jpg" width="96" alt="#09"> <img src="hasil_lokal/contoh_kondisi/backlight_40.jpg" width="96" alt="#40"> <img src="hasil_lokal/contoh_kondisi/backlight_41.jpg" width="96" alt="#41"> <img src="hasil_lokal/contoh_kondisi/backlight_50.jpg" width="96" alt="#50"> |
+| Redup | 1 | <img src="hasil_lokal/contoh_kondisi/redup_56.jpg" width="96" alt="#56"> |
+| Sudut ekstrem | 1 | <img src="hasil_lokal/contoh_kondisi/sudut_ekstrem_12.jpg" width="96" alt="#12"> |
 
 **Bukti EXIF.** Data EXIF ke-59 foto (merek dan model HP, waktu foto, resolusi, aperture, ISO, exposure) ada di
 `bukti/exif_mycapture.csv`. Data lokasi GPS sengaja tidak saya sertakan karena berisi alamat rumah, dan foto aslinya
@@ -120,10 +109,29 @@ Auto-Orient dan Resize Stretch ke 640×480, tanpa augmentasi.
 
 ![Statistik dataset mycapture di Roboflow](bukti/roboflow_analytics_2026-11-24.png)
 
-**Seberapa mirip mycapture dengan data latih?** Dari 53 kelas yang muncul di mycapture, 4 kelas (scissors,
-toothbrush, mouse, keyboard) tidak punya contoh train sama sekali, dan 19 kelas punya kurang dari 10 contoh train.
-Komposisinya juga berbeda: kelas terbanyak di mycapture adalah `box` (171 objek, padahal di train hanya 95),
-`chair` (104), dan `bottle` (91).
+**Seberapa mirip mycapture dengan data latih?** Cukup berbeda, baik dari kelas yang muncul maupun proporsinya.
+Grafik di bawah membandingkan persentase objek tiap kelas di mycapture dan di train v5. Karena jumlah objeknya
+berbeda (886 vs 4.479), yang dibandingkan adalah persentase, bukan jumlah.
+
+![Komposisi kelas mycapture dibanding train v5](hasil_lokal/grafik_kelas_mycapture_vs_train.png)
+
+Tiga kelas terbanyak di mycapture (`box`, `chair`, `bottle`) menyumbang 41% objek, sedangkan di train ketiganya
+hanya 8%. `box` saja hampir seperlima isi mycapture, tetapi cuma 2% di train. Sebaliknya, kelas yang banyak di
+train seperti `wall-other-merged`, `table-merged`, `pan`, dan `wallet` jarang muncul di foto saya, dan `stairs` serta
+`trash-bin` tidak muncul sama sekali.
+
+Tabel berikut mengelompokkan 53 kelas mycapture menurut berapa banyak contohnya di train:
+
+| Contoh di train v5 | Kelas mycapture | Objek mycapture | % objek | Kelas |
+|---|---|---|---|---|
+| 0 | 4 | 10 | 1,1% | scissors, toothbrush, mouse, keyboard |
+| 1–9 | 15 | 86 | 9,7% | shelf, handbag, backpack, tv, laptop, curtain, clock, cell phone, sink, fork, toilet, dining table, paper-merged, refrigerator, mirror-stuff |
+| 10–49 | 13 | 160 | 18,1% | wall-brick, light, cabinet-merged, rug-merged, cup, pillow, wall-tile, bed, spoon, couch, paper, blanket, window-blind |
+| 50–99 | 10 | 368 | 41,5% | box, bottle, window-other, plate, potted plant, door-stuff, floor-wood, ceiling-merged, plug, stove-merged |
+| 100 ke atas | 11 | 262 | 29,6% | chair, wall-other-merged, floor-other-merged, book, person, table-merged, toy, counter, pan, food-other-merged, wallet |
+
+Jadi 19 kelas (sekitar 11% objek) hampir tidak pernah dilihat model saat training, dan hanya 30% objek mycapture
+yang berasal dari kelas dengan 100 contoh train atau lebih.
 
 ---
 
@@ -577,55 +585,38 @@ adalah menambah contoh kursi dan stool dari lingkungan seperti ini ke data latih
 | Data foto sendiri: nama asli, waktu foto, kondisi | `rename_log.csv` |
 | EXIF 59 foto (tanpa GPS) | `bukti/exif_mycapture.csv`, `bukti/exif_hp_mycapture_01.png` |
 | Panduan dan screenshot anotasi | `annotation_checklist.md`, folder `bukti/` |
-| Repositori dan riwayat commit Git | https://github.com/RXhy/comvis-instance-segmentation |
+| Repositori dan riwayat commit Git | <https://github.com/RXhy/comvis-instance-segmentation> |
 
 ---
 
 ## Lampiran A. Deklarasi penggunaan AI
 
-Saya memakai AI (Claude, lewat Claude Code) untuk:
-
+AI (Claude, lewat Claude Code) dipakai untuk:
 - memahami tugas dan menganalisis statistik dataset;
-- memberi saran pengambilan foto dan panduan anotasi;
+- menyusun rencana foto dan panduan anotasi Roboflow;
 - memilih model;
-- menulis kode notebook (download data, subset, training, evaluasi), modul `lib/`, dan script rename;
-- membantu menyusun dan merapikan teks laporan ini.
+- menulis kode notebook (download data, subset, training, evaluasi, laporan), modul `lib/`, dan script rename.
 
-Pengambilan foto, seluruh anotasi, hipotesis, dan keputusan akhir saya kerjakan sendiri.
+Seluruh pengambilan foto, anotasi, dan keputusan akhir dikerjakan sendiri.
 
 ### Prompt utama
 
-| No | Prompt (diringkas, sesuai yang saya ketik) | Dipakai untuk |
+| No | Prompt (ringkas) | Dipakai untuk |
 |---|---|---|
 | 1 | "aku mau tau classnya apa aja biar aku bisa ambil foto … buat notebook untuk download" | notebook 01 dan daftar kelas |
-| 2 | "itu udah ada outputnya, interpretasiin … wall other merged apaan" | memahami statistik v5 |
-| 3 | "kasih saran apa aja yang harus difoto" | rencana pengambilan foto |
-| 4 | "apakah fotoku terlalu sulit" | mengevaluasi komposisi foto |
-| 5 | "cara annotate di roboflow gimana" / "pake polygon aman kan" | panduan anotasi |
-| 6 | "saran modelnya apa aja" | pemilihan model |
-| 7 | "buatin notebook untuk training 3 modelnya, aku mau train di kaggle" | notebook 02–04 |
-| 8 | "kamu bisa tau objek di mycapture apa aja, dan yang tidak ada kelasnya" | `annotation_checklist.md` |
+| 2 | "kasih saran apa aja yang harus difoto" | rencana foto |
+| 3 | "apakah fotoku terlalu sulit" | evaluasi komposisi foto |
+| 4 | "saran modelnya apa aja" | pemilihan model |
+| 5 | "bantu aku buat notebook untuk training 3 modelnya, untuk train di kaggle" | notebook 02–04 |
+| 6 | "kamu bisa tau objek di mycapture apa aja, dan yang tidak ada kelasnya" | `annotation_checklist.md` |
 
-### Saat saran atau kode AI ternyata salah
+### Kasus saran/kode AI yang salah dan perbaikannya
 
-1. **AP selalu bernilai 0.** Kode evaluasi dari AI mengambil angka ringkasan bawaan pycocotools. Karena batas deteksi
-   saya ubah menjadi 200, fungsi ringkasan itu (yang selalu mencari batas 100) mengembalikan −1 dan tercatat sebagai 0.
-   Saya curiga saat uji singkat menunjukkan AP50 0,33 tetapi AP 0,00, yang jelas tidak masuk akal. Perbaikannya, AP
-   dihitung langsung dari tabel precision, lalu dicocokkan dengan pycocotools pada batas 100; hasilnya identik
-   (0,2158 vs 0,2158).
-2. **Daftar kelas awal tidak akurat.** Daftar 93 kelas pertama dari AI diambil dari halaman project Roboflow dan memuat
-   kelas typo. Setelah file anotasi v5 dianalisis, ternyata v5 hanya punya 74 kelas. Sejak itu daftar resmi saya ambil
-   dari file anotasi (`outputs/class_names_v5.txt`).
-3. **Perintah install package yang keliru.** Notebook lokal awalnya memakai `!pip install`, yang di Jupyter lokal bisa
-   memasang package ke Python yang berbeda dari kernel. Saya ganti menjadi `%pip install`.
-4. **Script rename ikut mengganti file tersembunyi.** Ada file bernama hanya `.jpg` yang tidak terlihat saat
-   pengecekan awal dan ikut di-rename menjadi `mycapture_49.jpg`. Setelah saya cek, isinya memang foto asli dari HP,
-   jadi waktu fotonya saya lengkapi manual dari EXIF di `rename_log.csv`.
-5. **Mask2Former kehabisan memori GPU di Kaggle.** Fungsi prediksi dari AI memperbesar 50 mask sekaligus ke resolusi
-   asli gambar, padahal test v5 punya gambar sampai 3024×3398 sehingga butuh 3,8 GB. Uji di laptop tidak menangkap
-   masalah ini karena gambarnya kecil. Jumlah mask yang diproses sekaligus lalu disesuaikan dengan ukuran gambar;
-   puncak memori pada 4 gambar terbesar turun menjadi 1,06 GB.
-6. **Log training per epoch rusak.** Fungsi pencatat dari AI menulis header CSV dari baris pertama saja, padahal
-   kolom AP valid baru muncul di epoch evaluasi, sehingga `results.csv` tidak bisa dibaca. Fungsinya diperbaiki agar
-   menulis ulang header saat ada kolom baru, dan file lama diperbaiki dengan menambah dua nama kolom tanpa mengubah
-   isi datanya.
+| No | Kasus | Cara ketahuan | Perbaikan |
+|---|---|---|---|
+| 1 | **AP@[.50:.95] selalu 0.** Kode evaluasi dari AI mengambil `COCOeval.stats`. Karena batas deteksi diubah menjadi 200, fungsi ringkasan pycocotools (yang selalu mencari `maxDets=100`) mengembalikan −1 → tercatat 0 | Smoke test: AP50 0,33 tapi AP 0,00, tidak masuk akal | AP dihitung langsung dari tabel `precision` hasil `accumulate()`, dicocokkan dengan pycocotools pada `maxDets=100` → identik (0,2158 vs 0,2158) |
+| 2 | **Daftar kelas awal tidak akurat.** Daftar 93 kelas dari AI diambil dari halaman project Roboflow dan memuat typo | Setelah file COCO v5 dianalisis, v5 hanya punya 74 kelas | Daftar resmi diambil dari file anotasi v5 (`outputs/class_names_v5.txt`) |
+| 3 | **`!pip install` di notebook lokal** bisa memasang package ke Python yang berbeda dari kernel | – | Diganti `%pip install` |
+| 4 | **Script rename ikut mengganti file tersembunyi** bernama `.jpg` menjadi `mycapture_49.jpg` | File tidak terlihat saat pengecekan awal, baru ketahuan setelah rename | Isi file dicek (foto asli HP, EXIF 18 Nov 12:34), waktu foto dilengkapi manual di `rename_log.csv` |
+| 5 | **Mask2Former CUDA out of memory.** Fungsi prediksi dari AI memperbesar 50 mask sekaligus ke resolusi asli; gambar test v5 sampai 3024×3398 butuh 3,8 GB | Run Kaggle gagal; smoke test lokal tidak menangkap karena gambarnya kecil | Jumlah mask per potongan disesuaikan ukuran gambar; puncak memori di 4 gambar terbesar 1,06 GB |
+| 6 | **Log training per epoch rusak.** `append_csv` dari AI menulis header dari baris pertama saja; kolom AP valid baru muncul di epoch evaluasi | `results.csv` tidak bisa dibaca pandas | Fungsi menulis ulang header kalau ada kolom baru; file lama diperbaiki dengan menambah 2 nama kolom di header, isi data tidak diubah |
