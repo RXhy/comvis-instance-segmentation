@@ -27,3 +27,9 @@ __pycache__/
 .env
 Thumbs.db
 desktop.ini
+
+# Foto demo live (EXIF berisi GPS)
+demo/
+
+# Salinan foto sisa eksperimen (bisa dibuat ulang oleh notebook 05)
+hasil_lokal/eksperimen/*/

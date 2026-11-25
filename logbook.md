@@ -24,11 +24,11 @@
 | 7 | Training 3 model × 3 fraksi di Kaggle | Selesai | 24 Nov | `*/metrics.csv`, `*/gpu_log.csv`, `*/<run>/results.csv` |
 | 8 | Hipotesis perbandingan model | Dicatat | 24 Nov | bagian 3 logbook ini |
 | 9 | Evaluasi mycapture (domain shift) | Selesai | 24 Nov | `hasil_lokal/metrics_mycapture.csv` |
-| 10 | Analisis 5 foto gagal + eksperimen kecil | Selesai | 24 Nov | `05_laporan_utama.ipynb` bagian 7, `hasil_lokal/eksperimen/` |
-| 11 | Notebook laporan utama | Selesai | 24 Nov | `05_laporan_utama.ipynb` |
-| 12 | Repositori Git (riwayat commit) | Belum | – | – |
-| 13 | Notebook demo live | Belum | – | – |
-| 14 | Administrasi (nama/NRP, blur voucher, izin wajah) | Belum | – | lihat bagian 7 |
+| 10 | Analisis 5 foto gagal + eksperimen kecil | Selesai | 24 Nov | `05_inferensi_evaluasi.ipynb` bagian 7, `hasil_lokal/eksperimen/` |
+| 11 | Laporan dan notebook inferensi | Selesai | 25 Nov | `laporan.md`, `05_inferensi_evaluasi.ipynb` |
+| 12 | Repositori Git (riwayat commit) | Berjalan | 25 Nov | GitHub `comvis-instance-segmentation` |
+| 13 | Notebook demo live | Selesai | 25 Nov | `06_demo.ipynb` |
+| 14 | Administrasi (nama/NRP, blur voucher, izin wajah) | Selesai | 25 Nov | lihat bagian 6 dan 7 |
 
 ---
 
@@ -65,9 +65,11 @@
 | 20 | 24 Nov | Mengecek file export (COCO Segmentation, 640×480) | 898 polygon (lebih banyak dari screenshot karena ada perbaikan anotasi setelahnya) | Ada kelas di luar v5: `chair-crowd` (12 polygon, disengaja) dan `nox` (1, typo dari `box` di #46) | `nox` → `box` saat evaluasi (`MYCAP_MERGE`). `<kelas>-crowd` dibaca sebagai `<kelas>` dengan `iscrowd=1` (area abaikan) | `data/room_mycapture.v1i.coco-segmentation` |
 | 21 | 24 Nov | Memindahkan kode inferensi ke `lib/` dan uji reproduksi di laptop | Mask AP test v5 laptop vs Kaggle: YOLO 0,0891 vs 0,0890; Mask R-CNN 0,1049 vs 0,1049; Mask2Former 0,1651 vs 0,1651 | – | Bobot dan kode inferensi lokal terbukti sama dengan saat training, jadi evaluasi mycapture dilakukan di laptop | `lib/common.py`, `lib/models.py`, `lib/analysis.py` |
 | 22 | 24 Nov | Evaluasi 3 model × 3 fraksi di mycapture | AP mycapture < test v5 di **9 dari 9 run** (−14% s.d. −32%) (Lampiran D) | – | – | `hasil_lokal/metrics_mycapture.csv`, `hasil_lokal/grafik_*.png` |
-| 23 | 24 Nov | Analisis 5 foto gagal + eksperimen kecil | #55 kursi → `stairs`; #51 keyboard/mouse terlupakan; #28 piring → `pan`; #41 backlight + gamma; #49 batas mask 28×28 (Lampiran G) | – | Setiap penjelasan diuji dengan eksperimen; hipotesis resolusi mask di #49 **terbantah** | `05_laporan_utama.ipynb` bagian 7, `hasil_lokal/eksperimen/` |
-| 24 | 24 Nov | Membuat notebook laporan utama | Hipotesis, tahapan, inferensi, hasil, pembahasan, analisis kegagalan, bukti | Font markdown notebook terlalu besar | Ukuran font diatur lewat setting VS Code | `05_laporan_utama.ipynb` |
+| 23 | 24 Nov | Analisis 5 foto gagal + eksperimen kecil | #55 kursi → `stairs`; #51 keyboard/mouse terlupakan; #28 piring → `pan`; #41 backlight + gamma; #49 batas mask 28×28 (Lampiran G) | – | Setiap penjelasan diuji dengan eksperimen; hipotesis resolusi mask di #49 **terbantah** | `05_inferensi_evaluasi.ipynb` bagian 7, `hasil_lokal/eksperimen/` |
+| 24 | 24 Nov | Membuat notebook laporan utama | Hipotesis, tahapan, inferensi, hasil, pembahasan, analisis kegagalan, bukti | Font markdown notebook terlalu besar | Ukuran font diatur lewat setting VS Code | `05_inferensi_evaluasi.ipynb` |
 | 25 | 24 Nov | Menyiapkan bukti EXIF dan `.gitignore` | EXIF 59 foto tanpa GPS; screenshot detail foto di HP | EXIF semua foto berisi **GPS alamat rumah**; ada wajah orang | Folder `mycapture/` tidak di-commit. EXIF dibagikan tanpa GPS; screenshot dipotong di atas baris lokasi | `bukti/exif_mycapture.csv`, `bukti/exif_hp_mycapture_01.png`, `.gitignore` |
+| 26 | 25 Nov | Memisahkan laporan dari notebook | Laporan ditulis ulang sebagai `laporan.md` (tanpa kode, gambar diambil dari `hasil_lokal/`); notebook 05 dijadikan notebook inferensi dan evaluasi saja | Notebook 05 bercampur antara kode, output, dan narasi panjang, sehingga sulit dibaca sebagai laporan | Narasi dipindah ke `laporan.md`; `05_laporan_utama.ipynb` diganti nama menjadi `05_inferensi_evaluasi.ipynb`, kode dan output tidak diubah | `laporan.md`, `05_inferensi_evaluasi.ipynb` |
+| 27 | 25 Nov | Demo live dan administrasi | Demo inferensi foto baru sudah dilakukan saat sesi; izin dari semua orang yang wajahnya ada di foto (#51, #53, #54, #57, #58) sudah didapat | – | Foto #01 (voucher) tidak perlu di-blur karena tidak dilampirkan di mana pun | `06_demo.ipynb` |
 
 ---
 
@@ -83,7 +85,7 @@ Dugaan saya: secara keseluruhan **semua model akan berperforma buruk**, apa pun 
 |---|---|---|---|---|
 | 1 | Kualitas dataset v5 rendah | Train hanya 397 gambar untuk 74 kelas, ada kelas typo/duplikat (`scissor`/`scissors`, `wall`/`wall-other-merged`, `st-`), dan 8 kelas tanpa contoh train | **Terdukung** | Mask AP test v5 tertinggi hanya 0,165 (Mask2Former 100%); YOLO 100% hanya 0,089. Sebagai pembanding kasar, mask AP ketiga model di COCO sekitar 0,38–0,45. Kelas tanpa contoh train (`keyboard`, `mouse`, `scissors`) hanya dikenali YOLO yang masih "ingat" COCO |
 | 2 | Data timpang, sehingga AP test v5 jauh di bawah AP valid | Antar-kelas: `wall-other-merged` 756 instance, banyak kelas hanya 1–5. Antar-split: handbag 5 vs 125, dining table 4 vs 112, wallet 197 vs 5 | **Terdukung** | Gap valid vs test v5 besar di ketiga model (Mask R-CNN 0,187 vs 0,105; Mask2Former 0,289 vs 0,165). Ada juga inkonsistensi label: kardus = `box` di train, `cardboard` di test |
-| 3 | mycapture sangat berbeda dari train, sehingga **AP mycapture < AP test v5** untuk semua model | Foto dari rumah, kafe, kelas, dan ballroom Indonesia, banyak kondisi sulit dan benda tanpa kelas | **Terdukung** | 9 dari 9 run (−14% s.d. −32%); `05_laporan_utama.ipynb` bagian 5.3 |
+| 3 | mycapture sangat berbeda dari train, sehingga **AP mycapture < AP test v5** untuk semua model | Foto dari rumah, kafe, kelas, dan ballroom Indonesia, banyak kondisi sulit dan benda tanpa kelas | **Terdukung** | 9 dari 9 run (−14% s.d. −32%); `05_inferensi_evaluasi.ipynb` bagian 5.3 |
 
 ### 3.2 Hipotesis perbandingan model – 24 Nov 2026
 
@@ -108,9 +110,9 @@ Dugaan saya: secara keseluruhan **semua model akan berperforma buruk**, apa pun 
 | 23 Nov 2026 | Lokal RTX 3050 | ketiga model | smoke test | < 10 per model | uji kode, bukan hasil resmi |
 | 23 Nov 2026 | Kaggle T4 | YOLO11s-seg | 025 / 050 / 100pct | train 3,7 / 11,2 / 22,8; eval 0,7 / 0,7 / 0,8 | total ≈ 40 menit; early stop di epoch 33 / 88 / 114 (`yolo11s/gpu_log.csv`) |
 | 23 Nov 2026 | Kaggle T4 | Mask R-CNN | 025 / 050 / 100pct | train 16,4 / 23,9 / 40,3; eval 2,0 / 1,9 / 1,7 | total ≈ 86 menit; 40 epoch penuh, best epoch 30 / 32 / 32 (`maskrcnn/gpu_log.csv`) |
-| 23 Nov 2026 | Kaggle T4 | Mask2Former | percobaan 1 | [TODO] | gagal: CUDA OOM saat evaluasi test v5 (kasus AI no. 5) |
+| 23 Nov 2026 | Kaggle T4 | Mask2Former | percobaan 1 | 113 (1 jam 53 menit) | gagal: CUDA OOM saat evaluasi test v5 (kasus AI no. 5); waktu dari riwayat run Kaggle ("Failed after 1 hour and 53 minutes") |
 | 23 Nov 2026 | Kaggle T4 | Mask2Former | 025 / 050 / 100pct | train 24,8 / 39,4 / 40,5; eval 1,8 / 1,7 / 2,0 | total ≈ 110 menit; 55 / 50 / 28 epoch, best epoch 35 / 30 / 15 (`mask2former/gpu_log.csv`) |
-| 24 Nov 2026 | Lokal RTX 3050 | ketiga model | inferensi mycapture + eksperimen | 3–15 detik per run (59 foto) | `05_laporan_utama.ipynb` bagian 4 |
+| 24 Nov 2026 | Lokal RTX 3050 | ketiga model | inferensi mycapture + eksperimen | 3–15 detik per run (59 foto) | `05_inferensi_evaluasi.ipynb` bagian 4 |
 
 ---
 
@@ -156,7 +158,7 @@ Seluruh pengambilan foto, anotasi, dan keputusan akhir dikerjakan sendiri.
 |---|---|---|---|
 | 1 | `CLASS_MERGE` (`scissor→scissors`, `wall→wall-other-merged`, buang `st-`; total 5 anotasi) | Diputuskan | **Tidak dipakai.** Semua run memakai `CLASS_MERGE = {}`, sama di ketiga notebook, sehingga perbandingan tetap adil |
 | 2 | Mengurangi foto ballroom (#55, #56, #59) dan gudang (#20–#23) yang berat dianotasi | Diputuskan | Tetap dipakai dan dianotasi lengkap. Yang dihapus hanya #60 dan #61 karena resolusinya berbeda |
-| 3 | Izin dari orang yang wajahnya ada di foto (#51, #53, #54, #57, #58) | Belum | [TODO] |
+| 3 | Izin dari orang yang wajahnya ada di foto (#51, #53, #54, #57, #58) | Diputuskan | Semua orang di foto tersebut sudah memberi izin (25 Nov) |
 
 ---
 
@@ -164,11 +166,11 @@ Seluruh pengambilan foto, anotasi, dan keputusan akhir dikerjakan sendiri.
 
 | No | Kegiatan | Status | Catatan |
 |---|---|---|---|
-| 1 | Membuat repositori Git privat dan commit bertahap | Belum | foto `mycapture/` dan bobot `*.pt` tidak ikut (`.gitignore`) |
-| 2 | Notebook demo live (inferensi foto baru, ubah threshold, AP satu kelas) | Belum | untuk demo 10 menit |
-| 3 | Mengisi nama dan NRP di `05_laporan_utama.ipynb` | Belum | |
-| 4 | Blur voucher/barcode di foto #01 sebelum dilampirkan | Belum | |
-| 5 | Mengisi menit GPU Mask2Former percobaan 1 | Belum | lihat riwayat run di Kaggle |
+| 1 | Membuat repositori Git privat dan commit bertahap | Berjalan | repo `comvis-instance-segmentation` sudah ada; commit dan push lanjutan oleh saya sendiri |
+| 2 | Notebook demo live (inferensi foto baru, ubah threshold, AP satu kelas) | Selesai (25 Nov) | `06_demo.ipynb`; demo sudah dilakukan saat sesi |
+| 3 | Mengisi nama dan NRP di laporan | Selesai | `laporan.md` |
+| 4 | Blur voucher/barcode di foto #01 sebelum dilampirkan | Tidak perlu | Foto #01 tidak dilampirkan di laporan maupun repo (folder `mycapture/` tidak di-commit) |
+| 5 | Mengisi menit GPU Mask2Former percobaan 1 | Selesai | 113 menit, dari riwayat run Kaggle |
 | 6 | Menyimpan bobot model di Google Drive (opsional) | Belum | bobot >100 MB, tidak bisa masuk GitHub |
 
 ---

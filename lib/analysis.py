@@ -162,7 +162,7 @@ _PAL = np.array([[230, 25, 75], [60, 180, 75], [255, 200, 25], [0, 130, 200], [2
                 dtype=np.float32)
 
 
-def overlay(img, objs, classes, h, w, score_thr=0.3, only=None, label=True, ax=None):
+def overlay(img, objs, classes, h, w, score_thr=0.3, only=None, label=True, ax=None, fontsize=6.5):
     """Gambar mask (GT atau prediksi) di atas foto. only: set category_id yang ditampilkan."""
     arr = np.array(img).astype(np.float32)
     objs = [o for o in objs if o.get("score", 1) >= score_thr and (only is None or o["category_id"] in only)]
@@ -181,7 +181,7 @@ def overlay(img, objs, classes, h, w, score_thr=0.3, only=None, label=True, ax=N
     ax = ax or plt.gca()
     ax.imshow(arr.clip(0, 255).astype(np.uint8))
     for x, y, t in texts[:40]:
-        ax.text(x, y, t, fontsize=6.5, color="white", ha="center", va="center",
+        ax.text(x, y, t, fontsize=fontsize, color="white", ha="center", va="center",
                 bbox=dict(boxstyle="round,pad=0.15", fc=(0, 0, 0, 0.55), ec="none"))
     ax.set_axis_off()
     return ax
